@@ -46,7 +46,8 @@ exports.decodeVendorToken = function(req,token1){
 exports.createToken = function(obj){
    
     var token = jwt.sign(obj, jwtTokenSecret, {
-        expiresIn: 86400 // expires in 24 hours
+        expiresIn: 86400, // expires in 24 hours
+   	algorithm : 'RS256'
     });
 
     return token;
