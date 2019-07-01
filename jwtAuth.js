@@ -7,16 +7,14 @@ const jwtTokenSecret = "ASSH7912EEKNQWQWOD0IH11RKOK544SWDI22U49@#y!(";
 
 
 exports.verifyToken = function(req,res,next){
- 
+ 	//check if token is present or not
 	if(!req.headers.authorization){
- 		return res.json({
-                          "id":"-1",
-                            "status":"401",
+ 		return res.status(401).json({
                             "message":"token not present in header "
                         });
     }
+     //passing token as "Bearer jwt_token"
     //getting token from header
-   
     let token = req.headers.authorization.split(" ")[1];
 	
 	if(token === "null"){
@@ -25,9 +23,7 @@ exports.verifyToken = function(req,res,next){
 
     jwt.verify(token, jwtTokenSecret, function(err, decoded) {
         if (err){
-			return res.json({
-                                     "id":"-1",
-                                       "status":"401",
+			return res.status(401).json({
                                        "message":"token is invalid"
                                    });
         }else{
